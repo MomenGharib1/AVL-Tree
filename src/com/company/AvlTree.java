@@ -2,7 +2,7 @@ package com.company;
 
 public class AvlTree<AnyType extends Comparable<AnyType>> {
 
-    private static class Node<AnyType> {
+    public static class Node<AnyType> {
         private AnyType value;
         private int height;
         private Node<AnyType> LeftChild;
@@ -39,7 +39,7 @@ public class AvlTree<AnyType extends Comparable<AnyType>> {
     }
 
     public int TreeHeight() {
-        return root.height;
+        return (root==null) ? -1 : root.height;
     }
 
     private Node<AnyType> balance(Node<AnyType> root) {
@@ -89,9 +89,11 @@ public class AvlTree<AnyType extends Comparable<AnyType>> {
         return (node == null ? 0 : NodeHeight(node.LeftChild) - NodeHeight(node.RightChild));
     }
 
+
     public boolean search(AnyType value) {
         var current = root;
         while (current != null) {
+            var val = current.value;
             if (value.compareTo(current.value) < 0)
                 current = current.LeftChild;
             else if (value.compareTo(current.value) > 0)
@@ -102,13 +104,15 @@ public class AvlTree<AnyType extends Comparable<AnyType>> {
         return false;
     }
 
-    public Node<AnyType> remove(AnyType value){
-        return remove(root, value); 
+    public void remove(AnyType value){
+        root =  remove(root, value);
     }
     
-    private Node<AnyType> remove(Node<AnyType> root, AnyType value){
-        if(root == null)
+    private Node<AnyType> remove(Node<AnyType> root, AnyType value) {
+        if (root == null){
+            System.out.println("Error value " + value +" isn't in the tree");
             return root;
+        }
         int x = value.compareTo(root.value);
         if(x < 0)
             root.LeftChild = remove(root.LeftChild, value);
@@ -140,12 +144,18 @@ public class AvlTree<AnyType extends Comparable<AnyType>> {
         printInorder(node.LeftChild);
 
         /* then print the data of node */
-        System.out.print(node.value + " ");
+        System.out.println(node.value + " ");
 
         /* now recur on right child */
         printInorder(node.RightChild);
     }
 
     public void printInorder() { printInorder(root); }
+
+    public void clearTree(){
+        root.RightChild = null;
+        root.LeftChild = null;
+        root = null;
+    }
 
 }
