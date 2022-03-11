@@ -1,5 +1,4 @@
 package com.company.Application;
-
 import com.company.AvlTree;
 
 import java.io.*;
@@ -24,9 +23,8 @@ public class Parser {
         if (LoadPattern.matcher(command).find()) {
             tree = Load(command);
             tree.printInorder();
-        } else if (InsertPattern.matcher(command).find()) {
+        } else if(InsertPattern.matcher(command).find()) {
             tree = Insert(command);
-            tree.printInorder();
         } else if (LookUpPattern.matcher(command).find()) {
             LookUp(command);
         } else if (RemovePattern.matcher(command).find()) {
@@ -59,18 +57,20 @@ public class Parser {
         return tree;
     }
 
-    private AvlTree<String> Insert(String command) {
+    private AvlTree<String> Insert(String command){
         String word = command.split("[\\(]")[1].split("\\)")[0];
         word = word.replaceAll("\\s+", "");
-        if (tree.search(word))
-            System.out.println("Word already in the dictionary!");
-        else
-            tree.insert_nodes(word);
+        if(tree.search(word)) {
+            System.out.println("value already exists");
+            return tree;
+        }
+        tree.insert_nodes(word);
+        tree.printInorder();
         return tree;
     }
 
     private void PrintSize() {
-        System.out.println(tree.size);
+        System.out.println(tree.getSize());
     }
 
     private void LookUp(String command) {
