@@ -15,8 +15,6 @@ public class Main {
         System.out.println("=========================================================================================");
         Parser parser = new Parser();
         Scanner sc = new Scanner(System.in);
-        AvlTree tree = new AvlTree();
-
         String in;
         while (!(in = sc.nextLine()).equals("Exit")) {
             parser.parse(in);
