@@ -14,8 +14,10 @@ public class AvlTree<AnyType extends Comparable<AnyType>> {
     }
 
     private Node<AnyType> root;
+    public int size = 0;
 
     public void insert_nodes(AnyType value) {
+        size++;
         root = insert_nodes(root, value);
     }
 
@@ -23,15 +25,24 @@ public class AvlTree<AnyType extends Comparable<AnyType>> {
         if (root == null) {
             return new Node<>(value);
         }
+
         if (value.compareTo(root.value) < 0) {
             root.LeftChild = insert_nodes(root.LeftChild, value);
+
         } else if (value.compareTo(root.value) > 0) {
             root.RightChild = insert_nodes(root.RightChild, value);
+
         } else {
-            System.out.println("value already exists");
+            size--;
+            System.out.println("Word already exists");
         }
         setHeight(root);
         return balance(root);
+
+    }
+
+    public void getCount() {
+        System.out.println(size);
     }
 
     private int NodeHeight(Node<AnyType> node) {
@@ -39,7 +50,7 @@ public class AvlTree<AnyType extends Comparable<AnyType>> {
     }
 
     public int TreeHeight() {
-        return (root==null) ? -1 : root.height;
+        return (root == null) ? -1 : root.height;
     }
 
     private Node<AnyType> balance(Node<AnyType> root) {
@@ -104,39 +115,37 @@ public class AvlTree<AnyType extends Comparable<AnyType>> {
         return false;
     }
 
-    public void remove(AnyType value){
-        root =  remove(root, value);
+    public void remove(AnyType value) {
+        root = remove(root, value);
     }
-    
+
     private Node<AnyType> remove(Node<AnyType> root, AnyType value) {
-        if (root == null){
-            System.out.println("Error value " + value +" isn't in the tree");
+        if (root == null) {
+            System.out.println("Error value " + value + " isn't in the tree");
             return root;
         }
         int x = value.compareTo(root.value);
-        if(x < 0)
+        if (x < 0)
             root.LeftChild = remove(root.LeftChild, value);
-        else if(x > 0)
+        else if (x > 0)
             root.RightChild = remove(root.RightChild, value);
-        else if(root.RightChild != null && root.LeftChild != null){
+        else if (root.RightChild != null && root.LeftChild != null) {
             var t = findMin(root.RightChild);
             root.value = t.value;
             root.RightChild = remove(root.RightChild, t.value);
-        }
-        else{
+        } else {
             root = (root.LeftChild != null) ? root.LeftChild : root.RightChild;
         }
         return balance(root);
     }
 
-    private Node<AnyType> findMin(Node<AnyType> root){
-        if(root.LeftChild == null)
-                return root;
+    private Node<AnyType> findMin(Node<AnyType> root) {
+        if (root.LeftChild == null)
+            return root;
         return findMin(root.LeftChild);
     }
 
-    private void printInorder(Node<AnyType> node)
-    {
+    private void printInorder(Node<AnyType> node) {
         if (node == null)
             return;
 
@@ -150,9 +159,11 @@ public class AvlTree<AnyType extends Comparable<AnyType>> {
         printInorder(node.RightChild);
     }
 
-    public void printInorder() { printInorder(root); }
+    public void printInorder() {
+        printInorder(root);
+    }
 
-    public void clearTree(){
+    public void clearTree() {
         root.RightChild = null;
         root.LeftChild = null;
         root = null;

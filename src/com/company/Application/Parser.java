@@ -12,6 +12,8 @@ public class Parser{
     private Pattern RemovePattern = Pattern.compile("^Remove\\s\\([a-zA-z0-9\\s+]+\\)");
     private Pattern batchLookupPattern  = Pattern.compile("^BatchLookUp\\s+[_|-|a-zA-z0-9:\\/]+\\.txt");
     private Pattern batchRemovePattern  = Pattern.compile("^BatchRemove\\s+[_|-|a-zA-z0-9:\\/]+\\.txt");
+    private Pattern PrintSizePattern  = Pattern.compile("PrintSize");
+
 
     public Parser() {
         this.tree = new AvlTree<>();
@@ -40,6 +42,10 @@ public class Parser{
             tree = BatchRemove(command);
             tree.printInorder();
         }
+        else if(PrintSizePattern.matcher(command).find()) {
+            PrintSize();
+        }
+
         System.out.println("------------------------------------------");
     }
 
@@ -63,6 +69,9 @@ public class Parser{
         word = word.replaceAll("\\s+", "");
         tree.insert_nodes(word);
         return tree;
+    }
+    private void PrintSize(){
+        System.out.println(tree.size);
     }
 
     private void LookUp(String command){
