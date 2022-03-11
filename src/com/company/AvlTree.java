@@ -35,7 +35,7 @@ public class AvlTree<AnyType extends Comparable<AnyType>> {
         } else if (value.compareTo(root.value) > 0) {
             root.RightChild = insert_nodes(root.RightChild, value);
         } else {
-            System.out.println("value already exists");
+            System.out.println("Word already exists!!");
             size--;
         }
         setHeight(root);

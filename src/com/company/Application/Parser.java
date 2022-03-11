@@ -61,7 +61,7 @@ public class Parser {
         String word = command.split("[\\(]")[1].split("\\)")[0];
         word = word.replaceAll("\\s+", "");
         if(tree.search(word)) {
-            System.out.println("value already exists");
+            System.out.println("Word already exists!!");
             return tree;
         }
         tree.insert_nodes(word);
