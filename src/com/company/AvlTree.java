@@ -41,10 +41,6 @@ public class AvlTree<AnyType extends Comparable<AnyType>> {
 
     }
 
-    public void getCount() {
-        System.out.println(size);
-    }
-
     private int NodeHeight(Node<AnyType> node) {
         return (node == null ? -1 : node.height);
     }

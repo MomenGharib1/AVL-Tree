@@ -18,7 +18,7 @@ public class Main {
         AvlTree tree = new AvlTree();
 
         String in;
-        while(!(in = sc.nextLine()).equals("Exit")) {
+        while (!(in = sc.nextLine()).equals("Exit")) {
             parser.parse(in);
         }
 
