@@ -67,9 +67,13 @@ public class Parser{
     private AvlTree<String> Insert(String command){
         String word = command.split("[\\(]")[1].split("\\)")[0];
         word = word.replaceAll("\\s+", "");
-        tree.insert_nodes(word);
+        if(tree.search(word))
+            System.out.println("Word already in the dictionary!");
+        else
+            tree.insert_nodes(word);
         return tree;
     }
+
     private void PrintSize(){
         System.out.println(tree.size);
     }
