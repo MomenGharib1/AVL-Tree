@@ -1,5 +1,6 @@
 package com.company.Application;
 import com.company.AvlTree;
+import com.company.StringGenerator;
 
 import java.io.*;
 import java.util.regex.Pattern;
@@ -64,8 +65,11 @@ public class Parser {
             System.out.println("Word already exists!!");
             return tree;
         }
-        tree.insert_nodes(word);
-        tree.printInorder();
+        StringGenerator generator = new StringGenerator();
+           for(int i = 0; i<1000; i++){
+              tree.insert_nodes(generator.Generate());
+           }
+         tree.printInorder();
         return tree;
     }
 
@@ -115,6 +119,7 @@ public class Parser {
         String path = command.split("[ ]+")[1];
         File file = FileHandler.loadFile(path);
         String st, st1;
+        long begin = System.currentTimeMillis();
         if (file != null) {
             BufferedReader br = new BufferedReader(new FileReader(file));
             while ((st = br.readLine()) != null) {
@@ -122,6 +127,10 @@ public class Parser {
                 tree.remove(st1);
             }
         }
+        long end = System.currentTimeMillis();
+        long  time = end - begin;
+        System.out.println("Time is: " + time+"ms");
+        tree.printInorder();
         return tree;
     }
 
