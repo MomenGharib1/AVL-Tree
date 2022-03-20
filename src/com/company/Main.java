@@ -8,11 +8,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-      AvlTree tree = new AvlTree<>();
-      StringGenerator generator = new StringGenerator();
-      for(int i = 0; i<10; i++){
-          tree.insert_nodes(generator.Generate());
-      }
-      tree.printInorder();
+      test insert = new test();
+      insert.calcInsertionTime(10);
     }
 }
